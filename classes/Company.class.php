@@ -1,5 +1,4 @@
 <?php
-//include('classes/DbManager.class.php');
 
 function __autoload($class_name){
 	include_once $class_name . '.class.php';
@@ -16,7 +15,6 @@ class Company {
         if ($company != null  &&  sizeof($company)>0){
           $this->setId($company[0][DbManager::$_COLNAME_ID]);
           $this->setName($company[0][DbManager::$_COLNAME_COMPANY_NAME]);
-          //echo "companyID and name setter: ".$this->getId().", ".$this->getName();
         }else{
           //echo "company retrieved is null or has a size of 0";
         }
@@ -74,7 +72,6 @@ class Company {
    }
 	
 	public function getEmployees(){
-     //$this->setCompanyEmployees(DbManager::getInstance()->getDbAndTable('Employee')->selectAll('Employee'));
      $employeesDbFormated = DbManager::getInstance()->getDbAndTable('Employee')->select('Employee',DbManager::$_COLNAME_EMPLOYEE_COMP_ID,$this->getId());
      $this->setCompanyEmployees(DbManager::getInstance()->format_employee_dbToObject($employeesDbFormated));
      if ($this->getCompanyEmployees() != null  &&  sizeof($this->getCompanyEmployees())>0){
@@ -108,27 +105,18 @@ class Company {
      if ($this->getCompanyEmployees() == null){
        return null;
      }
-     //echo "employees of companyID ".$this->getId().", are: ".print_r($this->getCompanyEmployees(),TRUE);
      if (is_array($this->getCompanyEmployees())){
        foreach($this->getCompanyEmployees() as $employee){
          if ($employee->getId() == $employeeId){
-           //echo ".employee matched!"; 
            return $employee;
-         }else{
-           //echo ".employee readed (but not matched with ".$employeeId."): ".print_r($employee,TRUE);
          }
        }
      }else{
        if ($this->getCompanyEmployees()->getId() == $employeeId){
-         //echo ".employee matched!"; 
          return $this->getCompanyEmployees();
-       }else{
-         //echo ".employee readed (but not matched with ".$employeeId."): ".print_r($employee,TRUE);
        }
      }
      return null;
-     //other way could be: $employee = DbManager::getInstance()->getDbAndTable('Employee')->select( 'Employee', DbManager::$_COLNAME_ID, $employeeId );
-     //return $this->employees->getEmployeeByID($employeeId);
 	}
   
   	public function saveCompany(){

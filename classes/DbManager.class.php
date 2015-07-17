@@ -1,9 +1,5 @@
 <?php
-/*
-function __autoload($class_name){
-	include_once $class_name . '.class.php';
-}
-*/
+
 final class DbManager {
    private static $instance = null;	
    private $_dbInstance = null;
@@ -54,24 +50,6 @@ final class DbManager {
 			return 1;
 		}
 	}
-/*
-  public function saveEntity($entity){
-    if ($entity instanceof Company ){
-      $company = (Company)$entity;
-      if ($company->getId() != null){ //update
-        $itemToUpdate = $this->getDbAndTable(get_class($entity))->select(get_class($entity), DbManager::$_COLNAME_ID, $company->getId());
-        if (sizeof($itemToUpdate) != 1){
-          $itemToUpdate[DbManager::$_COLNAME_ID] = $company->getId();
-        }
-        $itemToUpdate[DbManager::$_COLNAME_COMPANY_NAME] = $company->getName();
-        return DbManager::getInstance()->getDbAndTable(get_class($entity))->update(get_class($entity), DbManager::$_COLNAME_ID, $company->getId(), $itemToUpdate);
-      }else{//create
-        return "Error trying to add a new employee";
-      }
-    }
-    $this->getDbAndTable(get_class('Company'))->
-  }
-*/
 
 	public function format_employee_dbToObject($employeeDb){
      if ($employeeDb == null  ||  sizeof($employeeDb)==0){

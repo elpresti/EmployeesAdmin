@@ -78,7 +78,7 @@ try{
            $company = new Company($companyId);
            $employee = $company->getEmployeeById($employeeId);
            if ($employee != null){
-             $outMsg="getemployeebyid executed. Employee data: ".print_r($employee);
+             $outMsg="getemployeebyid executed. Employee data: ".print_r($employee,TRUE);
            }else{
              $outMsg="getemployeebyid executed. Employee not found in DB";
            }
